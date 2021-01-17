@@ -56,7 +56,7 @@ void qpalm_set_factorization_method(QPALMWorkspace *work, solver_common *c)
     At = ladel_sparse_free(At);
 
     /* Switching criterion */
-    if ((nnz_kkt*nnz_kkt)/(nnz_schur*nnz_schur)*n/(n+m) < 2) 
+    if (nnz_schur==0 || (nnz_kkt*nnz_kkt)/(nnz_schur*nnz_schur)*n/(n+m) < 2)
         work->solver->factorization_method = FACTORIZE_KKT;
     else
         work->solver->factorization_method = FACTORIZE_SCHUR;
